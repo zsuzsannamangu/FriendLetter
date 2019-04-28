@@ -1,5 +1,7 @@
 //have access to logic from MVC
 using Microsoft.AspNetCore.Mvc;
+//use LetterVariable.cs
+using FriendLetter.Models;
 
 namespace FriendLetter.Controllers
 {
@@ -18,8 +20,17 @@ namespace FriendLetter.Controllers
     // homepage: root path
     // ActionResult is a class built in to the MVC library to handle rendering views
     // View() is a built in method from MVC, this route should now return a view in the server's response to the client. View is invoked from the route Letter(), so it will return view from Letter.cshtml.
+    // create a new instance of our LetterVariable class, and provide it to the view:
     [Route("/")]
-    public ActionResult Letter() { return View(); }
+    public ActionResult Letter() {
+      // create new empty LetterVariable object
+      LetterVariable myLetterVariable = new LetterVariable();
+      //use SetRecipient() method defined in LetterVariable and sets _recipient property of object to Jessica
+      myLetterVariable.SetRecipient("Jessica");
+      myLetterVariable.SetSender("John");
+      //pass myLetterVariable object to View() as argument, so Letter.cshtml view now has access to LetterVariable object.
+      return View(myLetterVariable);
+    }
 
     //route decorator can be called anything, what matters is the name of Journal() when View is located
     [Route("/journal")]
