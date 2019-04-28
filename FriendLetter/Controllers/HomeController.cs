@@ -36,5 +36,18 @@ namespace FriendLetter.Controllers
     [Route("/journal")]
     public ActionResult Journal() { return View(); }
 
+    [Route("/form")]
+    public ActionResult Form() { return View(); }
+
+    //the arguments in PostCard are the name attribute of input in the form in Form.cshtml, they should match exactly
+    [Route("/postcard")]
+    public ActionResult PostCard(string recipient, string sender)
+    {
+      LetterVariable myLetterVariable = new LetterVariable();
+      myLetterVariable.SetRecipient(recipient);
+      myLetterVariable.SetSender(sender);
+      return View(myLetterVariable);
+    }
+
   }
 }
